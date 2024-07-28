@@ -130,7 +130,7 @@ class MockSWRequester:
         _swr_args = args
         _swr_kwargs = kwargs
 
-    def get_sw_categories(self) -> dict:
+    def get_sw_categories(self) -> list:
         return self.categories
 
     def get_sw_info(self, category) -> str:
