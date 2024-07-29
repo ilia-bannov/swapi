@@ -7,11 +7,9 @@ class APIRequester:
     def __init__(self, base_url):
         self.base_url = base_url
 
-    def get(self, url=None, params=None):
-        url = self.base_url if url is None else self.base_url + url
-        params = {'page': 1} if params is None else params
+    def get(self, url='', params={'page': 1}):
         try:
-            response = requests.get(url, params)
+            response = requests.get(self.base_url + url, params)
             response.raise_for_status()
             return response
         except requests.RequestException:
@@ -19,9 +17,6 @@ class APIRequester:
 
 
 class SWRequester(APIRequester):
-
-    def __init__(self, base_url):
-        super().__init__(base_url)
 
     def get_sw_categories(self):
         response = self.get('/')
@@ -42,4 +37,5 @@ def save_sw_data():
             f.write(swapi.get_sw_info(category))
 
 
-save_sw_data()
+if __name__ == "__main__":
+    save_sw_data()
